@@ -1,0 +1,55 @@
+操作符		结合性		功能				 	用法			表达式类型		拷贝/引用		求值规则															
+[]		L		subscript(下标)				variable[expr]		元素类型			元素引用			计算expr,生成int型临时变量t,中间结果类型转换为int,并保存到t,返回下标为t的元素的引用
+()		L		function call(函数调用)			name(expr_list)		函数返回值类型		返回值拷贝		按从左到右顺序计算expr_list,中间结果作为实参(可能存在强制类型转换)调用name,返回时拷贝返回值
+
+++		R		postfix increment(后自增操作)		lvalue++		与lvalue类型相同		lvalue旧值拷贝		生成与lvalue类型相同的临时变量保存lvalue旧值,lvalue值加1,返回临时变量
+-- 		R		postfix decrement(后自减操作) 		lvalue--		与lvalue类型相同		lvalue旧值拷贝		生成与lvalue类型相同的临时变量保存lvalue旧值,lvalue值减1,返回临时变量
+
+++		R		prefix increment(前自增操作)		++lvalue		与lvalue类型相同		lvalue新值引用		lvalue值加1,返回lvalue地址
+-- 		R		prefix decrement(前自减操作) 		--lvalue		与lvalue类型相同		lvalue新值引用		lvalue值减1,返回lvalue地址
+
+~		R       	bitwise NOT(位求反)			~expr			int			临时拷贝			计算expr,生成int型临时变量t,对中间结果求~,最终结果保存到t
+!		R 		logical NOT(逻辑非)			!expr			bool			临时拷贝			计算expr,结果为0,生成bool值为false的临时变量;非零,生成bool值为true的临时变量
+-		R 		unary minus(一元负号)			-expr			int/double		临时拷贝			计算expr,若结果类型为整形,生成int型临时变量t;否则生成double型临时变量t。对中间结果求-,最终结果保存到t
++ 		R		unary plus(一元正号)			+expr			int/double		临时拷贝			计算expr,若结果类型为整形,生成int型临时变量t;否则生成double型临时变量t。对中间结果求+,最终结果保存到t
+
+()		R		type conversion(类型转换)		(type)expr		指定type			临时拷贝			计算expr,生成type型临时变量t,结果强制转换为type,保存到t
+
+*		L		multiply(乘法)				expr * expr		int/double		临时拷贝			按左右顺序计算expr,若其中一个结果为浮点类型,生成double型临时变量t;否则生成int型临时变量t。对中间结果求*,最终结果保存到t
+/		L		divide(除法)				expr / expr		int/double		临时拷贝			按左右顺序计算expr,若其中一个结果为浮点类型,生成double型临时变量t;否则生成int型临时变量t。对中间结果求/,最终结果保存到t
+%		L		modulo (remainder)(求模(求余))		expr % expr		int/double		临时拷贝			按左右顺序计算expr,若其中一个结果为浮点类型,生成double型临时变量t;否则生成int型临时变量t。对中间结果求%,最终结果保存到t
+	
++		L		add(加法)				expr + expr		int/double		临时拷贝			按左右顺序计算expr,若其中一个结果为浮点类型,生成double型临时变量t;否则生成int型临时变量t。对中间结果求+,最终结果保存到t
+-		L		subtract(减法)				expr - expr		int/double		临时拷贝			按左右顺序计算expr,若其中一个结果为浮点类型,生成double型临时变量t;否则生成int型临时变量t。对中间结果求-,最终结果保存到t
+
+<<		L		bitwise shift left(位左移)		expr << expr		int			临时拷贝			按左右顺序计算expr,生成int型临时变量t。对中间结果求<<,最终结果保存到t
+>>		L		bitwise shift right(位右移)		expr >> expr		int			临时拷贝			按左右顺序计算expr,生成int型临时变量t。对中间结果求>>,最终结果保存到t
+
+<		L		less than(小于)				expr < expr		bool			临时拷贝			按左右顺序计算expr,生成bool型临时变量t。对中间结果求<,最终结果保存到t
+<=		L		less than or equal(小于或等于)		expr <= expr		bool			临时拷贝			按左右顺序计算expr,生成bool型临时变量t。对中间结果求<=,最终结果保存到t
+>		L		greater than(大于)			expr > expr		bool			临时拷贝			按左右顺序计算expr,生成bool型临时变量t。对中间结果求>,最终结果保存到t
+>=		L		greater than or equal(大于或等于)	expr >= expr		bool			临时拷贝			按左右顺序计算expr,生成bool型临时变量t。对中间结果求>=,最终结果保存到t
+
+==		L		equality(相等)				expr == expr		bool			临时拷贝			按左右顺序计算expr,生成bool型临时变量t。对中间结果求==,最终结果保存到t
+!=		L		inequality(不等)				expr != expr		bool			临时拷贝			按左右顺序计算expr,生成bool型临时变量t。对中间结果求!=,最终结果保存到t
+
+&		L		bitwise AND(位与)			expr & expr		int			临时拷贝			按左右顺序计算expr,生成int型临时变量t。对中间结果求&,最终结果保存到t
+
+^		L		bitwise XOR(位异或)			expr ^ expr		int			临时拷贝			按左右顺序计算expr,生成int型临时变量t。对中间结果求^,最终结果保存到t
+
+|		L		bitwise OR(位或)				expr | expr		int			临时拷贝			按左右顺序计算expr,生成int型临时变量t。对中间结果求|,最终结果保存到t
+
+&&		L		logical AND(逻辑与)			expr1 && expr2		bool			临时拷贝			短路求值:计算expr1,结果为0,生成bool值为false的临时变量作为最终结果;否则,计算expr2,结果为0,生成bool值为false的临时变量作为最终结果;非零,生成bool值为true的临时变量作为最终结果
+
+||		L		logical OR(逻辑或)			expr1 || expr2		bool			临时拷贝			短路求值:计算expr1,结果非零,生成bool值为true的临时变量作为最终结果;否则,计算expr2,结果为0,生成bool值为false的临时变量作为最终结果;非零,生成bool值为true的临时变量作为最终结果
+
+?:		R		conditional(条件操作)			expr1?expr2:expr3	与expr2/3类型相同	临时拷贝			短路求值:计算expr1；结果非零,计算expr2,生成与expr2类型相同的临时变量t,将expr2的值拷贝到t作为最终结果；否则,计算expr3,生成与expr3类型相同的临时变量t,将expr3的值拷贝到t作为最终结果
+
+=		R		assignment(赋值操作)			lvalue = expr		与lvalue类型相同		lvalue新值引用		计算expr,中间结果强制转换成与lvalue相同的类型,最终结果保存到lvalue	
+
+*=, /=, %=,	R		compound assign(复合赋值操作)		lvalue += expr		与lvalue类型相同		lvalue新值引用		计算expr,对lvalue和中间结果求+,最终结果强制转换成与lvalue相同的类型，拷贝到lvalue	
++=, -=,		R		
+<<=, >>=,	R		
+&=,|=, ^=	R
+		
+,		L		comma(逗号)				expr1 , expr2		与expr2类型相同		临时拷贝			按左右顺序计算expr,生成与expr2类型相同的临时变量t,将expr2的值拷贝到t
